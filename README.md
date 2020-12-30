@@ -14,6 +14,8 @@ A custom shortcut tool
 My timeouts are `0.3` and `0.5`, and I cut out a bunch of shortcuts that just
 open some google doc or a webpage that I want to peek at for a second.
 
+Don't forget about number keys and CAPS.
+
 ## Inspiration
 I think messing aound with [X-Keys][1] when I was working at RedHat gave me
 the idea. I wanted something like that, but frictionless enough that I could
