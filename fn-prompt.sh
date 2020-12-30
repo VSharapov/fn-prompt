@@ -75,6 +75,10 @@ case "$command" in
 		# Edit this file
 		gedit "$0" &
 		;;
+	"g")
+		# Gif search
+		$popup_term -e bash -c 'echo "Search for gif:"; read && firefox "https://www.google.com/search?q=${REPLY}&tbm=isch&tbs=itp:animated" ; nautilus ~/Downloads/'
+		;;
 	"h")
 		# Headphones
 		echo -e "connect 88:D0:39:6F:81:40" | bluetoothctl
