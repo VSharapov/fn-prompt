@@ -27,6 +27,10 @@ in_wait=3
 #     1 - Fn HAS been pressed recently
 #     2 - xTerm is open, waiting for a command
 initial_value="$(cat $lock_file)"
+if [ "$initial_value" == "" ]; then
+	echo "0" > $lock_file
+  initial_value="$(cat $lock_file)"
+fi
 
 # From 0 to 1...
 if [ "$initial_value" == "0" ]; then
