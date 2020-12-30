@@ -2,6 +2,8 @@
 
 #notify-send "Fn"
 #set -x
+# Useful for debugging: 
+#     while true; do date +"%s.%N `cat ~/.fn_prompt`"; sleep 0.02 ; done
 
 # Should these live in /tmp ? ... dunno
 lock_file="${HOME}/.fn_prompt"
@@ -9,6 +11,12 @@ resp_file="${HOME}/.fn_response"
 for i in $lock_file $resp_file; do
 	touch $i;
 done
+
+# How fast you must hit Fn twice - `man sleep` says:
+#     "NUMBER need not be an integer." - try 0.3 =)
+fn_wait=1
+# xTerm will stay open listening for input this long: (try 1 instead)
+in_wait=3
 
 # Explanation of lock_file magic values:
 #     0 - Fn has NOT been pressed recently
@@ -19,7 +27,7 @@ initial_value="$(cat $lock_file)"
 # From 0 to 1...
 if [ "$initial_value" == "0" ]; then
 	echo "1" > $lock_file
-	sleep 1
+	sleep $fn_wait
 	# ... and if it's still 1, back to 0
 	new_value="$(cat $lock_file)"
 	if [ $new_value == "1" ]; then
@@ -33,7 +41,7 @@ if [ "$initial_value" == "1" ]; then
 	if [ -e $resp_file ]; then rm $resp_file; fi
 	# TODO: The next line does not block sometimes (for example if a 't' is open) and everything after it doesn't get run
 	# TODO: Wait... I don't think this ^^^ is true.
-	xterm -e bash -c "echo 'Enter command'; read -n 1 -t 3 && echo \$REPLY > $resp_file"
+	xterm -e bash -c "echo 'Enter command'; read -n 1 -t $in_wait && echo \$REPLY > $resp_file"
 	command="$(if [ -e $resp_file ]; then cat $resp_file; fi)"
 	#notify-send "$(cat $resp_file)"
 	# ... and hopefully this is always true
