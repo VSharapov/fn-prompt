@@ -12,6 +12,10 @@ for i in $lock_file $resp_file; do
 	touch $i;
 done
 
+# A terminal which you _don't_ normally use
+#     i.e. Running a popup prompt with it won't disrupt anything
+popup_term="$(which xterm)"
+if [ -z "$popup_term" ]; then exit; fi
 # How fast you must hit Fn twice - `man sleep` says:
 #     "NUMBER need not be an integer." - try 0.3 =)
 fn_wait=1
@@ -41,7 +45,7 @@ if [ "$initial_value" == "1" ]; then
 	if [ -e $resp_file ]; then rm $resp_file; fi
 	# TODO: The next line does not block sometimes (for example if a 't' is open) and everything after it doesn't get run
 	# TODO: Wait... I don't think this ^^^ is true.
-	xterm -e bash -c "echo 'Enter command'; read -n 1 -t $in_wait && echo \$REPLY > $resp_file"
+	$popup_term -e bash -c "echo 'Enter command'; read -n 1 -t $in_wait && echo \$REPLY > $resp_file"
 	command="$(if [ -e $resp_file ]; then cat $resp_file; fi)"
 	#notify-send "$(cat $resp_file)"
 	# ... and hopefully this is always true
