@@ -3,11 +3,11 @@
 #notify-send "Fn"
 #set -x
 # Useful for debugging: 
-#     while true; do date +"%s.%N `cat ~/.fn_prompt`"; sleep 0.02 ; done
+#     while true; do date +"%s.%N `cat ~/.fnp_*`"; sleep 0.02 ; done
 
 # Should these live in /tmp ? ... dunno
-lock_file="${HOME}/.fn_prompt"
-resp_file="${HOME}/.fn_response"
+lock_file="${HOME}/.fnp_state"
+resp_file="${HOME}/.fnp_response"
 for i in $lock_file $resp_file; do
 	touch $i;
 done

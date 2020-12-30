@@ -1,15 +1,16 @@
-# fnPrompt
+# fn-prompt
 A custom shortcut tool
 
 ## Usage
 
-- Save `fn_primpt.sh` somewhere (`~/bin/` for me)
+- Save `fn-prompt.sh` somewhere (like `~/bin/`)
 - Open `GNOME settings` > `Keyboard Shortcuts` > `+`
-    - `Name` : `FnFn`
-    - `Command` : `~/bin/fn_prompt.sh`
+    - `Name` : `FnFn` or anything really
+    - `Command` : `~/bin/fn-prompt.sh` or wherever
     - `Shortcut` > `Set Shortcut` > hit your `Fn` key
         - Something like "Wake up" or "XF86WakeUp" should appear
-- Hit `Fn`, `Fn`, `e`, scroll down to "Commands" and make it your own!
+- Hit `Fn`, `Fn` in quick succession, followed by `e` when xTerm appears
+    - Scroll down to "Commands" and make it your own!
 
 My timeouts are `0.3` and `0.5`, and I cut out a bunch of shortcuts that just
 open some google doc or a webpage that I want to peek at for a second.
