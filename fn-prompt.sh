@@ -16,6 +16,8 @@ done
 #     i.e. Running a popup prompt with it won't disrupt anything
 popup_term="$(which xterm)"
 if [ -z "$popup_term" ]; then exit; fi
+additional_popup_term_arguments="-geometry 50x10"
+popup_term="${popup_term} ${additional_popup_term_arguments}"
 # How fast you must hit Fn twice - `man sleep` says:
 #     "NUMBER need not be an integer." - try 0.3 =)
 fn_wait=1
