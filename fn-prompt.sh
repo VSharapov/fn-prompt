@@ -79,7 +79,16 @@ case "$command" in
 		;;
 	"g")
 		# Gif search
-		$popup_term -e bash -c 'echo "Search for gif:"; read && firefox "https://www.google.com/search?q=${REPLY}&tbm=isch&tbs=itp:animated" ; nautilus ~/Downloads/'
+		sleep 0.1 # I suspect opening an xTerm as the other is closing
+		          #     might be what causes it to sometimes open with
+		          #     3x1 dimensions (probably minimum possible), no
+		          #     idea why it is so, but this seems to fix it.
+		$popup_term -e bash -c 'echo "Search for gif:" && read ;    \
+firefox "https://google.com/search?q=${REPLY}&tbm=isch&tbs=itp:animated" ; \
+echo Waiting for a new download to appear &&                               \
+inotifywait -t 120 -e create -e moved_to ~/Downloads/ ;                    \
+nohup nautilus ~/Downloads/ >/dev/null &                                   \
+sleep 0.1' # Won't launch nautilus without this delay 🤷
 		;;
 	"h")
 		# Headphones
