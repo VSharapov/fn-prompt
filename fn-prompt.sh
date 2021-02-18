@@ -125,7 +125,7 @@ sleep 0.1' # Won't launch nautilus without this delay 🤷
 		for i in {1..100}; do xte 'usleep 100000'; xte 'mouseclick 1'; done
 #		for i in {1..100}; do xte 'usleep 6000'; xte 'mouseclick 1'; done
 		;;
-	"Z")
+	"X")
 		xte 'mousemove 700 700'
 		xte 'usleep 1900000'
 		xte 'mousemove 1220 460'
@@ -139,6 +139,9 @@ sleep 0.1' # Won't launch nautilus without this delay 🤷
 		xte 'mouseclick 1'
 		xte 'usleep 200000'
 		xte 'mouseclick 1'
+		;;
+	"Z")
+		systemctl suspend
 		;;
 esac
 
