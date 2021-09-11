@@ -70,6 +70,24 @@ case "$command" in
 		# Blank screen
 		sleep 1; xset dpms force off &
 		;;
+	"C")
+		# Play around with night light color temperature in GNOME
+		# https://gist.github.com/VSharapov/fc98acdbcb4d6a4f08573fd2708fcfff
+		sleep 0.1 # I suspect opening an xTerm as the other is closing
+		          #     might be what causes it to sometimes open with
+		          #     3x1 dimensions (probably minimum possible), no
+		          #     idea why it is so, but this seems to fix it.
+		$popup_term -e bash -c 'ANSFILE=$(mktemp)
+		TEMPKEY="org.gnome.settings-daemon.plugins.color night-light-temperature"
+		while dialog --keep-tite --cancel-label "Done" --ok-label "Apply" \
+		             --rangebox "Set color temperature \n 6500 is normal" \
+		             0 0 1000 9999 \
+		             $(gsettings get $TEMPKEY | cut -d " " -f 2) \
+		             2>$ANSFILE
+		do
+		  gsettings set $TEMPKEY $(cat $ANSFILE)
+		done; rm $ANSFILE'
+		;;
 	"d")
 		~/Downloads/DiscordPTB/DiscordPTB &
 		;;
